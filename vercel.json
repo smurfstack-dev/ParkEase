@@ -2,6 +2,14 @@
   "version": 2,
   "routes": [
     {
+      "src": "/map",
+      "dest": "/map.html"
+    },
+    {
+      "src": "/admin",
+      "dest": "/admin.html"
+    },
+    {
       "src": "/(.*)",
       "dest": "/$1"
     }
