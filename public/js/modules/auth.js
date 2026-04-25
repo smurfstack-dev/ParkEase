@@ -328,13 +328,16 @@ class Auth {
     showToast("Creating account...", "info");
 
     try {
-      const response = await fetch("http://localhost:5000/api/auth/register", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
+      const response = await fetch(
+        "https://parkease-backend-u530.onrender.com/api/auth/register",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ name, email, password }),
         },
-        body: JSON.stringify({ name, email, password }),
-      });
+      );
 
       const data = await response.json();
 
@@ -374,13 +377,16 @@ class Auth {
     showToast("Logging in...", "info");
 
     try {
-      const response = await fetch("http://localhost:5000/api/auth/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
+      const response = await fetch(
+        "https://parkease-backend-u530.onrender.com/api/auth/login",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ email, password }),
         },
-        body: JSON.stringify({ email, password }),
-      });
+      );
 
       const data = await response.json();
 
@@ -513,7 +519,7 @@ class Auth {
 
         try {
           const response = await fetch(
-            "http://localhost:5000/api/bookings/my-bookings",
+            "https://parkease-backend-u530.onrender.com/api/bookings/my-bookings",
             {
               headers: { Authorization: `Bearer ${token}` },
             },
@@ -727,7 +733,7 @@ class Auth {
       const token = localStorage.getItem("token");
       try {
         const response = await fetch(
-          `http://localhost:5000/api/bookings/cancel/${bookingId}`,
+          `https://parkease-backend-u530.onrender.com/api/bookings/cancel/${bookingId}`,
           {
             method: "PUT",
             headers: { Authorization: `Bearer ${token}` },

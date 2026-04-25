@@ -541,7 +541,7 @@
         async function updateSpot(id, spotData) {
             const token = localStorage.getItem('adminToken');
             try {
-                const res = await fetch(`http://localhost:5000/api/admin/spots/${id}`, {
+                const res = await fetch(`https://parkease-backend-u530.onrender.com/api/admin/spots/${id}`, {
                     method: 'PUT',
                     headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
                     body: JSON.stringify(spotData)
@@ -564,7 +564,7 @@
             if (!email || !pwd) { showToast('Enter email and password', 'error'); return; }
             showToast('Logging in...', 'info');
             try {
-                const res = await fetch('http://localhost:5000/api/admin/login', {
+                const res = await fetch('https://parkease-backend-u530.onrender.com/api/admin/login', {
                     method: 'POST', headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ email, password: pwd })
                 });
@@ -588,7 +588,7 @@
             const token = localStorage.getItem('adminToken');
             if (!token) return;
             try {
-                const res = await fetch('http://localhost:5000/api/admin/spots', { headers: { 'Authorization': `Bearer ${token}` } });
+                const res = await fetch('https://parkease-backend-u530.onrender.com/api/admin/spots', { headers: { 'Authorization': `Bearer ${token}` } });
                 const data = await res.json();
                 if (data.success) {
                     document.getElementById('spotsList').innerHTML = data.spots.map(s => `
@@ -614,7 +614,7 @@
         async function deleteSpot(id) {
             const token = localStorage.getItem('adminToken');
             try {
-                const res = await fetch(`http://localhost:5000/api/admin/spots/${id}`, {
+                const res = await fetch(`https://parkease-backend-u530.onrender.com/api/admin/spots/${id}`, {
                     method: 'DELETE',
                     headers: { 'Authorization': `Bearer ${token}` }
                 });
@@ -645,7 +645,7 @@
             };
 
             try {
-                const res = await fetch('http://localhost:5000/api/admin/spots', {
+                const res = await fetch('https://parkease-backend-u530.onrender.com/api/admin/spots', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
                     body: JSON.stringify(spot)
@@ -670,7 +670,7 @@
         async function loadBookings() {
             const token = localStorage.getItem('adminToken');
             if (!token) return;
-            const res = await fetch('http://localhost:5000/api/admin/bookings', { headers: { 'Authorization': `Bearer ${token}` } });
+            const res = await fetch('https://parkease-backend-u530.onrender.com/api/admin/bookings', { headers: { 'Authorization': `Bearer ${token}` } });
             const data = await res.json();
             if (data.success) document.getElementById('bookingsList').innerHTML = data.bookings.map(b => `<tr><td>${escapeHtml(b.user_name)}</td><td>${escapeHtml(b.spot_name)}</td><td>${escapeHtml(b.vehicle_number)}</td><td>₹${b.total_amount}</td><td>${b.status}</td><td>${new Date(b.created_at).toLocaleDateString()}</td>`).join('');
         }
@@ -678,7 +678,7 @@
         async function loadUsers() {
             const token = localStorage.getItem('adminToken');
             if (!token) return;
-            const res = await fetch('http://localhost:5000/api/admin/users', { headers: { 'Authorization': `Bearer ${token}` } });
+            const res = await fetch('https://parkease-backend-u530.onrender.com/api/admin/users', { headers: { 'Authorization': `Bearer ${token}` } });
             const data = await res.json();
             if (data.success) document.getElementById('usersList').innerHTML = data.users.map(u => `<tr><td>${escapeHtml(u.name)}</td><td>${escapeHtml(u.email)}</td><td>${new Date(u.created_at).toLocaleDateString()}</td>`).join('');
         }

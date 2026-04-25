@@ -70,7 +70,7 @@ class ParkingMap {
 
         try {
           const response = await fetch(
-            "http://localhost:5000/api/bookings/my-bookings",
+            "https://parkease-backend-u530.onrender.com/api/bookings/my-bookings",
             {
               headers: { Authorization: `Bearer ${token}` },
             },
@@ -194,8 +194,8 @@ class ParkingMap {
 
     try {
       const url = currentCity
-        ? `http://localhost:5000/api/parking/spots?city=${encodeURIComponent(currentCity)}`
-        : "http://localhost:5000/api/parking/spots";
+        ? `https://parkease-backend-u530.onrender.com/api/parking/spots?city=${encodeURIComponent(currentCity)}`
+        : "https://parkease-backend-u530.onrender.com/api/parking/spots";
 
       const response = await fetch(url, {
         method: "GET",
@@ -229,7 +229,7 @@ class ParkingMap {
           let userBookedSpotIds = [];
           try {
             const bookingsResponse = await fetch(
-              "http://localhost:5000/api/bookings/my-bookings",
+              "https://parkease-backend-u530.onrender.com/api/bookings/my-bookings",
               {
                 headers: { Authorization: `Bearer ${token}` },
               },
@@ -388,7 +388,7 @@ class ParkingMap {
     for (let spot of this.parkingSpots) {
       try {
         const response = await fetch(
-          `http://localhost:5000/api/parking/availability/${spot.id}`,
+          `https://parkease-backend-u530.onrender.com/api/parking/availability/${spot.id}`,
           {
             headers: { Authorization: `Bearer ${token}` },
           },
@@ -556,81 +556,99 @@ class ParkingMap {
   }
 
   async proceedToPayment() {
-    const startTime = document.getElementById('startTime')?.value;
-    const duration = document.getElementById('duration')?.value;
-    const vehicleNo = document.getElementById('vehicleNo')?.value;
+    const startTime = document.getElementById("startTime")?.value;
+    const duration = document.getElementById("duration")?.value;
+    const vehicleNo = document.getElementById("vehicleNo")?.value;
     if (!startTime || !vehicleNo) {
-        showToast('Please fill all fields', 'error');
-        return;
+      showToast("Please fill all fields", "error");
+      return;
     }
     const totalAmount = this.selectedSpot.price * parseInt(duration);
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem("token");
     if (!token) {
-        showToast('Please login again', 'error');
-        return;
+      showToast("Please login again", "error");
+      return;
     }
 
     try {
-        const orderRes = await fetch('http://localhost:5000/api/payment/create-order', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
-            body: JSON.stringify({ amount: totalAmount })
-        });
-        const orderData = await orderRes.json();
-        if (!orderData.success) {
-            showToast('Failed to create payment order', 'error');
-            return;
-        }
+      const orderRes = await fetch(
+        "https://parkease-backend-u530.onrender.com/api/payment/create-order",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify({ amount: totalAmount }),
+        },
+      );
+      const orderData = await orderRes.json();
+      if (!orderData.success) {
+        showToast("Failed to create payment order", "error");
+        return;
+      }
 
-        const self = this; // preserve this for handler
-        const options = {
-            key: 'rzp_test_Sh0CA20EnHwOoQ',  
-            amount: totalAmount * 100,
-            currency: 'INR',
-            name: 'ParkEase',
-            description: `Booking for ${this.selectedSpot.name}`,
-            order_id: orderData.order.id,
-            handler: async (response) => {
-                const verifyRes = await fetch('http://localhost:5000/api/payment/verify', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
-                    body: JSON.stringify({
-                        order_id: response.razorpay_order_id,
-                        payment_id: response.razorpay_payment_id,
-                        signature: response.razorpay_signature,
-                        bookingData: {
-                            spot_id: self.selectedSpot.id,
-                            start_time: startTime,
-                            duration: parseInt(duration),
-                            vehicle_number: vehicleNo,
-                            total_amount: totalAmount
-                        }
-                    })
-                });
-                const verifyData = await verifyRes.json();
-                if (verifyData.success) {
-                    showToast('✅ Payment successful! Booking confirmed.', 'success');
-                    document.getElementById('bookingModal').style.display = 'none';
-                    self.loadParkingSpots();
-                } else {
-                    showToast('Payment verification failed', 'error');
-                }
+      const self = this; // preserve this for handler
+      const options = {
+        key: "rzp_test_Sh0CA20EnHwOoQ",
+        amount: totalAmount * 100,
+        currency: "INR",
+        name: "ParkEase",
+        description: `Booking for ${this.selectedSpot.name}`,
+        order_id: orderData.order.id,
+        handler: async (response) => {
+          const verifyRes = await fetch(
+            "https://parkease-backend-u530.onrender.com/api/payment/verify",
+            {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${token}`,
+              },
+              body: JSON.stringify({
+                order_id: response.razorpay_order_id,
+                payment_id: response.razorpay_payment_id,
+                signature: response.razorpay_signature,
+                bookingData: {
+                  spot_id: self.selectedSpot.id,
+                  start_time: startTime,
+                  duration: parseInt(duration),
+                  vehicle_number: vehicleNo,
+                  total_amount: totalAmount,
+                },
+              }),
             },
-            prefill: { name: auth.currentUser?.name, email: auth.currentUser?.email },
-            theme: { color: '#3b82f6' }
-        };
+          );
+          const verifyData = await verifyRes.json();
+          if (verifyData.success) {
+            showToast("✅ Payment successful! Booking confirmed.", "success");
+            document.getElementById("bookingModal").style.display = "none";
+            self.loadParkingSpots();
+          } else {
+            showToast("Payment verification failed", "error");
+          }
+        },
+        prefill: {
+          name: auth.currentUser?.name,
+          email: auth.currentUser?.email,
+        },
+        theme: { color: "#3b82f6" },
+      };
 
-        const rzp = new Razorpay(options);
-        rzp.on('payment.failed', (response) => {
-            console.error('Payment failed:', response);
-            showToast('Payment failed: ' + (response.error?.description || 'Unknown error'), 'error');
-        });
-        rzp.open();
+      const rzp = new Razorpay(options);
+      rzp.on("payment.failed", (response) => {
+        console.error("Payment failed:", response);
+        showToast(
+          "Payment failed: " + (response.error?.description || "Unknown error"),
+          "error",
+        );
+      });
+      rzp.open();
     } catch (error) {
-        console.error(error);
-        showToast('Payment error', 'error');
+      console.error(error);
+      showToast("Payment error", "error");
     }
-}
+  }
 
   updateSpotsCount() {
     const countEl = document.getElementById("spotsCount");
