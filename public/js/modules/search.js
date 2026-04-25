@@ -78,7 +78,7 @@ class SearchHandler {
       );
 
       setTimeout(() => {
-        window.location.href = "/map";
+        window.location.href = "/map.html";
       }, 500);
     } else {
       showToast(
@@ -187,7 +187,7 @@ class SearchHandler {
             `Showing parking near ${locationName || "your location"}!`,
             "success",
           );
-          window.location.href = "/map";
+          window.location.href = "/map.html";
         } catch (error) {
           console.error("Location error:", error);
 

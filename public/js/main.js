@@ -28,7 +28,7 @@ class ParkEaseApp {
     if (getStartedBtn) {
       getStartedBtn.addEventListener("click", () => {
         if (auth.isLoggedIn) {
-          window.location.href = "/map";
+          window.location.href = "/map.html";
         } else {
           auth.showSignupModal();
         }
@@ -41,7 +41,7 @@ class ParkEaseApp {
         if (auth.isLoggedIn) {
           localStorage.removeItem("searchCoordinates");
           localStorage.removeItem("searchLocation");
-          window.location.href = "/map";
+          window.location.href = "/map.html";
         } else {
           showToast("Please login to find parking", "error");
           auth.showLoginModal();
