@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>ParkEase | Find Parking Near You</title>
+    <link rel="stylesheet" href="/css/map.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <!-- Leaflet JS -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-brand">
+                <span class="brand-icon">🅿️</span>
+                <span class="brand-name">Park<span class="brand-highlight">Ease</span></span>
+            </div>
+            <div class="nav-links">
+                <a href="/">Home</a>
+                <a href="#" id="mapLink" class="active">Find Parking</a>
+                <a href="#" id="bookingsLink">My Bookings</a>
+            </div>
+            <div class="nav-buttons">
+                <span class="user-greeting" id="userGreeting"></span>
+                <button class="btn btn-outline" id="logoutBtnNav">Logout</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Map Section -->
+    <div class="map-container">
+        <div class="sidebar">
+            <div class="sidebar-header">
+                <h2>Available Parking Spots</h2>
+                <p id="spotsCount">Loading spots near you...</p>
+            </div>
+
+            <div class="filters">
+                <!-- Search Bar on Map -->
+                <div class="search-box-map">
+                    <span class="search-icon">🔍</span>
+                    <input type="text" id="mapSearchInput"
+                        placeholder="Search for a new location... e.g., Mumbai, New York, London">
+                    <button id="mapSearchBtn" class="btn btn-primary">Go</button>
+                </div>
+
+                <div class="filter-group">
+                    <label>📍 Distance</label>
+                    <select id="distanceFilter">
+                        <option value="0" selected>📍 All distances</option>
+                        <option value="500">Within 500m</option>
+                        <option value="1000">Within 1km</option>
+                        <option value="2000">Within 2km</option>
+                        <option value="5000">Within 5km</option>
+                    </select>
+                </div>
+
+                <div class="filter-group">
+                    <label>💰 Price Range</label>
+                    <select id="priceFilter">
+                        <option value="all" selected>All Prices</option>
+                        <option value="0-30">₹0 - ₹30/hr</option>
+                        <option value="30-60">₹30 - ₹60/hr</option>
+                        <option value="60-100">₹60 - ₹100/hr</option>
+                    </select>
+                </div>
+
+                <div class="filter-group">
+                    <label>⭐ Rating</label>
+                    <select id="ratingFilter">
+                        <option value="0" selected>All Ratings</option>
+                        <option value="4">4+ Stars</option>
+                        <option value="3">3+ Stars</option>
+                    </select>
+                </div>
+
+                <div class="filter-buttons">
+                    <button id="applyFiltersBtn" class="btn btn-primary">Apply Filters</button>
+                    <button id="resetFiltersBtn" class="btn btn-outline">Reset All</button>
+                </div>
+
+                <button id="myLocationBtn" class="btn btn-outline location-btn-map">📍 My Location</button>
+            </div>
+
+            <div class="parking-list" id="parkingList">
+                <div class="loading-spinner">Loading parking spots...</div>
+            </div>
+        </div>
+
+        <div class="map-wrapper">
+            <div id="map"></div>
+        </div>
+    </div>
+
+    <!-- Booking Modal -->
+    <div id="bookingModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Book Parking Spot</h2>
+                <span class="close">&times;</span>
+            </div>
+            <div class="modal-body" id="bookingModalBody">
+                <!-- Dynamic content -->
+            </div>
+        </div>
+    </div>
+
+    <script type="module" src="/js/map.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>ParkEase | Smart Parking Made Simple</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <!-- Leaflet CSS for future maps -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+</head>
+
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-brand">
+                <span class="brand-icon">🅿️</span>
+                <span class="brand-name">Park<span class="brand-highlight">Ease</span></span>
+            </div>
+            <div class="nav-links">
+                <a href="#home">Home</a>
+                <a href="#features">Features</a>
+                <a href="#how-it-works">How It Works</a>
+                <a href="#testimonials">Testimonials</a>
+                <a href="#contact">Contact</a>
+            </div>
+            <div class="nav-buttons">
+                <a href="/admin.html" class="btn btn-outline" style="text-decoration: none;">Admin</a>
+                <button class="btn btn-outline" id="loginBtn">Login</button>
+                <button class="btn btn-primary" id="signupBtn">Sign Up</button>
+            </div>
+            <button class="mobile-menu-btn" id="mobileMenuBtn">☰</button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+        <!-- Hero Section - FIXED -->
+        <section class="hero" id="home">
+            <div class="container">
+                <div class="hero-content">
+                    <div class="hero-badge">
+                        <span>✨ India's Most Trusted Parking App</span>
+                    </div>
+                    <h1 class="hero-title">
+                        Find Your Perfect<br>
+                        <span class="gradient-text">Parking Spot</span> in Seconds
+                    </h1>
+                    <p class="hero-description">
+                        Stop circling the block. Book secure parking spaces in advance,
+                        save time, and reduce stress with ParkEase. Join 50,000+ happy drivers!
+                    </p>
+                    <div class="hero-buttons">
+                        <button class="btn btn-large btn-primary" id="findParkingBtn">
+                            Find Parking →
+                        </button>
+                        <button class="btn btn-large btn-outline" id="demoBtn">
+                            ▶ Watch Demo
+                        </button>
+                    </div>
+        
+                    <!-- Search Box -->
+                    <div class="search-wrapper">
+                        <div class="search-box">
+                            <span class="search-icon">📍</span>
+                            <input type="text" placeholder="Search location... e.g., MG Road, Bangalore" id="locationSearch">
+                            <button class="btn btn-primary" id="searchBtn">Search</button>
+                        </div>
+                    </div>
+        
+                    <!-- Trust Badges -->
+                    <div class="trust-badges">
+                        <div class="trust-item">
+                            <span>⭐ 4.9</span>
+                            <span>App Store</span>
+                        </div>
+                        <div class="trust-item">
+                            <span>🏆 2026</span>
+                            <span>Best Parking App</span>
+                        </div>
+                        <div class="trust-item">
+                            <span>🔒 100%</span>
+                            <span>Secure Payments</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        
+            <!-- Stats Section - MOVED OUTSIDE CONTAINER -->
+            <div class="hero-stats">
+                <div class="stat">
+                    <div class="stat-number" id="stat1">500+</div>
+                    <div class="stat-label">Parking Spots</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number" id="stat2">50k+</div>
+                    <div class="stat-label">Happy Users</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number" id="stat3">98%</div>
+                    <div class="stat-label">Satisfaction Rate</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number" id="stat4">24+</div>
+                    <div class="stat-label">Cities Covered</div>
+                </div>
+            </div>
+        </section>
+
+    <!-- Features Section -->
+    <section class="features" id="features">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-badge">Why Choose Us</span>
+                <h2>Smart Features for <span class="gradient-text">Smart Parking</span></h2>
+                <p>Everything you need to park with confidence</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">📍</div>
+                    <h3>Real-time Location</h3>
+                    <p>Find nearest parking spots with live availability and distance tracking</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📅</div>
+                    <h3>Instant Booking</h3>
+                    <p>Reserve your spot in seconds and get instant confirmation</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">💳</div>
+                    <h3>Secure Payments</h3>
+                    <p>Pay seamlessly with Razorpay - UPI, cards, netbanking</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🗺️</div>
+                    <h3>GPS Navigation</h3>
+                    <p>Get turn-by-turn directions to your booked parking spot</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">⏰</div>
+                    <h3>24/7 Access</h3>
+                    <p>Book anytime, day or night with round-the-clock support</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔒</div>
+                    <h3>Safe & Secure</h3>
+                    <p>CCTV surveillance and security guard at all locations</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works -->
+    <section class="how-it-works" id="how-it-works">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-badge">Simple Process</span>
+                <h2>Park in <span class="gradient-text">3 Easy Steps</span></h2>
+                <p>From search to parking - it's that simple</p>
+            </div>
+            <div class="steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <div class="step-icon">🔍</div>
+                    <h3>Search</h3>
+                    <p>Enter your destination or use current location</p>
+                </div>
+                <div class="step-arrow">→</div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <div class="step-icon">📱</div>
+                    <h3>Book</h3>
+                    <p>Select spot, choose duration, and pay securely</p>
+                </div>
+                <div class="step-arrow">→</div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <div class="step-icon">🚗</div>
+                    <h3>Park</h3>
+                    <p>Follow GPS navigation and park with QR code</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials" id="testimonials">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-badge">Testimonials</span>
+                <h2>What Our <span class="gradient-text">Users Say</span></h2>
+                <p>Loved by thousands of drivers across India</p>
+            </div>
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <div class="testimonial-rating">⭐⭐⭐⭐⭐</div>
+                    <p>"Best parking app ever! Saves me at least 30 minutes every day. The real-time availability is a
+                        game changer!"</p>
+                    <div class="testimonial-user">
+                        <div class="user-avatar">RK</div>
+                        <div>
+                            <div class="user-name">Rahul Kumar</div>
+                            <div class="user-location">Bangalore</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-rating">⭐⭐⭐⭐⭐</div>
+                    <p>"Finally a solution for parking in Mumbai! Easy to use, secure payments, and great customer
+                        support."</p>
+                    <div class="testimonial-user">
+                        <div class="user-avatar">SP</div>
+                        <div>
+                            <div class="user-name">Sneha Patil</div>
+                            <div class="user-location">Mumbai</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-rating">⭐⭐⭐⭐⭐</div>
+                    <p>"The navigation feature is spot on! Never struggled to find my booked parking spot. Highly
+                        recommended!"</p>
+                    <div class="testimonial-user">
+                        <div class="user-avatar">AM</div>
+                        <div>
+                            <div class="user-name">Amit Mehta</div>
+                            <div class="user-location">Delhi</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Download App Section -->
+    <section class="download-app">
+        <div class="container">
+            <div class="download-content">
+                <div class="download-text">
+                    <span class="section-badge">Download Now</span>
+                    <h2>Get the <span class="gradient-text">ParkEase App</span></h2>
+                    <p>Available on iOS and Android. Download now and get ₹100 worth of parking credits!</p>
+                    <div class="app-buttons">
+                        <button class="app-btn">
+                            <span>📱</span>
+                            <div>
+                                <small>Download on</small>
+                                <strong>App Store</strong>
+                            </div>
+                        </button>
+                        <button class="app-btn">
+                            <span>🤖</span>
+                            <div>
+                                <small>Get it on</small>
+                                <strong>Google Play</strong>
+                            </div>
+                        </button>
+                    </div>
+                </div>
+                <div class="download-image">
+                    <div class="phone-mockup">📱</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta">
+        <div class="container">
+            <div class="cta-content">
+                <h2>Ready to Save Time & Money?</h2>
+                <p>Join 50,000+ drivers who park smarter with ParkEase</p>
+                <button class="btn btn-large btn-primary" id="getStartedBtn">
+                    Get Started Now →
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer" id="contact">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>ParkEase</h3>
+                    <p>Making parking simple, smart, and stress-free.</p>
+                    <div class="social-links">
+                        <a href="#">📘</a>
+                        <a href="#">📷</a>
+                        <a href="#">🐦</a>
+                        <a href="#">💼</a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <a href="#home">Home</a>
+                    <a href="#features">Features</a>
+                    <a href="#how-it-works">How It Works</a>
+                    <a href="#testimonials">Testimonials</a>
+                </div>
+                <div class="footer-section">
+                    <h4>Support</h4>
+                    <a href="#">Help Center</a>
+                    <a href="#">FAQs</a>
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Service</a>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact</h4>
+                    <p>📧 support@parkease.com</p>
+                    <p>📞 +91 98765 43210</p>
+                    <p>🏢 Bangalore, India</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 ParkEase. All rights reserved. | Made with ❤️ for India</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script type="module" src="/js/main.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ParkEase | Admin Panel</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #0f0f1a;
+            color: white;
+        }
+
+        .navbar {
+            background: rgba(15, 15, 26, 0.95);
+            backdrop-filter: blur(20px);
+            padding: 1rem 2rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            cursor: pointer;
+        }
+
+        .logo span {
+            background: linear-gradient(135deg, #3b82f6, #06b6d4);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .tabs {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding-bottom: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .tab-btn {
+            background: transparent;
+            border: none;
+            color: #94a3b8;
+            padding: 0.5rem 1.5rem;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            border-radius: 8px;
+        }
+
+        .tab-btn.active {
+            background: #3b82f6;
+            color: white;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #94a3b8;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 12px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            color: white;
+            font-size: 1rem;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: #3b82f6;
+        }
+
+        .btn {
+            padding: 10px 24px;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #3b82f6, #06b6d4);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+        }
+
+        .btn-success {
+            background: #10b981;
+            color: white;
+        }
+
+        .btn-success:hover {
+            background: #059669;
+            transform: translateY(-2px);
+        }
+
+        .btn-warning {
+            background: #f59e0b;
+            color: white;
+        }
+
+        .btn-warning:hover {
+            background: #d97706;
+            transform: translateY(-2px);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: white;
+        }
+
+        .delete-btn {
+            background: #ef4444;
+            color: white;
+            border: none;
+            padding: 5px 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            margin-top: 0.5rem;
+        }
+
+        .delete-btn:hover {
+            background: #dc2626;
+        }
+
+        .edit-btn {
+            background: #f59e0b;
+            color: white;
+            border: none;
+            padding: 5px 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            margin-top: 0.5rem;
+            margin-right: 5px;
+        }
+
+        .edit-btn:hover {
+            background: #d97706;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th,
+        td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        th {
+            color: #94a3b8;
+            font-weight: 500;
+        }
+
+        .login-container {
+            max-width: 400px;
+            margin: 100px auto;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            padding: 2rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .login-container h2 {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .spots-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 1rem;
+        }
+
+        .spot-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            padding: 1rem;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        .spot-card:hover {
+            border-color: rgba(59, 130, 246, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .spot-card h4 {
+            margin-bottom: 0.5rem;
+            color: white;
+        }
+
+        .card-buttons {
+            display: flex;
+            gap: 8px;
+            margin-top: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .custom-confirm {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(8px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 20000;
+        }
+
+        .confirm-content {
+            background: linear-gradient(135deg, #1a1a2e, #0f0f1a);
+            border-radius: 20px;
+            padding: 1.5rem;
+            width: 90%;
+            max-width: 400px;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            animation: slideIn 0.3s ease;
+        }
+
+        .confirm-content p {
+            margin: 1rem 0;
+            color: #94a3b8;
+        }
+
+        .confirm-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 1rem;
+        }
+
+        .confirm-yes {
+            background: #ef4444;
+            color: white;
+            border: none;
+            padding: 8px 24px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        .confirm-yes:hover {
+            background: #dc2626;
+        }
+
+        .confirm-no {
+            background: #3b82f6;
+            color: white;
+            border: none;
+            padding: 8px 24px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        .confirm-no:hover {
+            background: #2563eb;
+        }
+
+        .edit-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(8px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 20000;
+        }
+
+        .edit-modal-content {
+            background: linear-gradient(135deg, #1a1a2e, #0f0f1a);
+            border-radius: 20px;
+            padding: 2rem;
+            width: 90%;
+            max-width: 500px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            animation: slideIn 0.3s ease;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .edit-modal-content h3 {
+            margin-bottom: 1.5rem;
+            color: white;
+        }
+
+        .toast {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            padding: 12px 24px;
+            border-radius: 8px;
+            color: white;
+            z-index: 10000;
+            animation: slideIn 0.3s ease;
+            font-weight: 500;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div id="loginSection">
+        <div class="login-container">
+            <h2>🔐 Admin Login</h2>
+            <div class="form-group"><label>📧 Email Address</label><input type="email" id="adminEmail"
+                    placeholder="Enter Email" autocomplete="off"></div>
+            <div class="form-group"><label>🔒 Password</label><input type="password" id="adminPassword"
+                    placeholder="Enter Password" autocomplete="off"></div>
+            <button class="btn btn-primary" style="width: 100%;" onclick="adminLogin()">Login</button>
+        </div>
+    </div>
+
+    <div id="adminPanel" style="display: none;">
+        <nav class="navbar">
+            <div class="logo" onclick="window.location.href='/'">Park<span>Ease</span> Admin</div><button
+                class="btn btn-outline" onclick="adminLogout()">Logout</button>
+        </nav>
+        <div class="container">
+            <div class="tabs"><button class="tab-btn active" onclick="showTab('spots')">🅿️ Parking
+                    Spots</button><button class="tab-btn" onclick="showTab('addSpot')">➕ Add New Spot</button><button
+                    class="tab-btn" onclick="showTab('bookings')">📅 Bookings</button><button class="tab-btn"
+                    onclick="showTab('users')">👥 Users</button></div>
+            <div id="spotsTab" class="tab-content active">
+                <div class="spots-grid" id="spotsList">Loading...</div>
+            </div>
+            <div id="addSpotTab" class="tab-content">
+                <div class="card">
+                    <h3>➕ Add New Parking Spot</h3>
+                    <form id="addSpotForm">
+                        <div class="form-group"><label>Name</label><input type="text" id="spotName" required></div>
+                        <div class="form-group"><label>Address</label><input type="text" id="spotAddress" required>
+                        </div>
+                        <div class="form-group"><label>City</label><input type="text" id="spotCity" required></div>
+                        <div class="form-group"><label>Latitude</label><input type="number" step="any" id="spotLat"
+                                required></div>
+                        <div class="form-group"><label>Longitude</label><input type="number" step="any" id="spotLng"
+                                required></div>
+                        <div class="form-group"><label>Price per hour (₹)</label><input type="number" id="spotPrice"
+                                required></div>
+                        <div class="form-group"><label>Total Spots</label><input type="number" id="spotTotal" value="50"
+                                required></div>
+                        <div class="form-group"><label>Rating</label><input type="number" step="0.1" id="spotRating"
+                                value="4.0"></div><button type="submit" class="btn btn-primary">Add Spot</button>
+                    </form>
+                </div>
+            </div>
+            <div id="bookingsTab" class="tab-content">
+                <div class="card">
+                    <h3>All Bookings</h3>
+                    <div style="overflow-x: auto;">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>User</th>
+                                    <th>Spot</th>
+                                    <th>Vehicle</th>
+                                    <th>Amount</th>
+                                    <th>Status</th>
+                                    <th>Date</th>
+                                </tr>
+                            </thead>
+                            <tbody id="bookingsList"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div id="usersTab" class="tab-content">
+                <div class="card">
+                    <h3>Registered Users</h3>
+                    <div style="overflow-x: auto;">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Email</th>
+                                    <th>Registered On</th>
+                                </tr>
+                            </thead>
+                            <tbody id="usersList"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let adminToken = null;
+
+        function showToast(msg, type) {
+            const t = document.createElement('div');
+            t.className = 'toast';
+            t.textContent = msg;
+            t.style.background = type === 'success' ? '#10b981' : '#ef4444';
+            document.body.appendChild(t);
+            setTimeout(() => t.remove(), 3000);
+        }
+
+        function showConfirmDialog(message, onConfirm) {
+            const modal = document.createElement('div');
+            modal.className = 'custom-confirm';
+            modal.innerHTML = `
+                <div class="confirm-content">
+                    <h3 style="color: white;">⚠️ Confirm Delete</h3>
+                    <p>${message}</p>
+                    <div class="confirm-buttons">
+                        <button class="confirm-yes">Yes, Delete</button>
+                        <button class="confirm-no">Cancel</button>
+                    </div>
+                </div>
+            `;
+            document.body.appendChild(modal);
+            modal.querySelector('.confirm-yes').onclick = () => { modal.remove(); onConfirm(); };
+            modal.querySelector('.confirm-no').onclick = () => modal.remove();
+            modal.onclick = (e) => { if (e.target === modal) modal.remove(); };
+        }
+
+        function showEditModal(spot) {
+            const modal = document.createElement('div');
+            modal.className = 'edit-modal';
+            modal.innerHTML = `
+                <div class="edit-modal-content">
+                    <h3>✏️ Edit Parking Spot</h3>
+                    <form id="editSpotForm">
+                        <div class="form-group"><label>Name</label><input type="text" id="editName" value="${escapeHtml(spot.name)}" required></div>
+                        <div class="form-group"><label>Address</label><input type="text" id="editAddress" value="${escapeHtml(spot.address)}" required></div>
+                        <div class="form-group"><label>City</label><input type="text" id="editCity" value="${escapeHtml(spot.city || '')}" required></div>
+                        <div class="form-group"><label>Latitude</label><input type="number" step="any" id="editLat" value="${spot.latitude}" required></div>
+                        <div class="form-group"><label>Longitude</label><input type="number" step="any" id="editLng" value="${spot.longitude}" required></div>
+                        <div class="form-group"><label>Price per hour (₹)</label><input type="number" id="editPrice" value="${spot.price_per_hour}" required></div>
+                        <div class="form-group"><label>Total Spots</label><input type="number" id="editTotal" value="${spot.total_spots}" required></div>
+                        <div class="form-group"><label>Available Spots</label><input type="number" id="editAvailable" value="${spot.available_spots}" required></div>
+                        <div class="form-group"><label>Rating</label><input type="number" step="0.1" id="editRating" value="${spot.rating}" required></div>
+                        <div style="display: flex; gap: 1rem; justify-content: flex-end;">
+                            <button type="button" class="btn btn-outline" onclick="this.closest('.edit-modal').remove()">Cancel</button>
+                            <button type="submit" class="btn btn-primary">Save Changes</button>
+                        </div>
+                    </form>
+                </div>
+            `;
+            document.body.appendChild(modal);
+
+            document.getElementById('editSpotForm').onsubmit = async (e) => {
+                e.preventDefault();
+                const updatedSpot = {
+                    name: document.getElementById('editName').value,
+                    address: document.getElementById('editAddress').value,
+                    city: document.getElementById('editCity').value,
+                    latitude: parseFloat(document.getElementById('editLat').value),
+                    longitude: parseFloat(document.getElementById('editLng').value),
+                    price_per_hour: parseInt(document.getElementById('editPrice').value),
+                    total_spots: parseInt(document.getElementById('editTotal').value),
+                    available_spots: parseInt(document.getElementById('editAvailable').value),
+                    rating: parseFloat(document.getElementById('editRating').value),
+                    is_active: true
+                };
+                await updateSpot(spot.id, updatedSpot);
+                modal.remove();
+            };
+        }
+
+        async function updateSpot(id, spotData) {
+            const token = localStorage.getItem('adminToken');
+            try {
+                const res = await fetch(`http://localhost:5000/api/admin/spots/${id}`, {
+                    method: 'PUT',
+                    headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
+                    body: JSON.stringify(spotData)
+                });
+                const data = await res.json();
+                if (data.success) {
+                    showToast('Spot updated successfully!', 'success');
+                    loadSpots();
+                } else {
+                    showToast(data.message || 'Update failed', 'error');
+                }
+            } catch (error) {
+                showToast('Error updating spot', 'error');
+            }
+        }
+
+        async function adminLogin() {
+            const email = document.getElementById('adminEmail').value.trim();
+            const pwd = document.getElementById('adminPassword').value;
+            if (!email || !pwd) { showToast('Enter email and password', 'error'); return; }
+            showToast('Logging in...', 'info');
+            try {
+                const res = await fetch('http://localhost:5000/api/admin/login', {
+                    method: 'POST', headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email, password: pwd })
+                });
+                const data = await res.json();
+                if (data.success === true) {
+                    adminToken = data.token;
+                    localStorage.setItem('adminToken', adminToken);
+                    document.getElementById('loginSection').style.display = 'none';
+                    document.getElementById('adminPanel').style.display = 'block';
+                    showToast('Welcome Admin!', 'success');
+                    loadSpots(); loadBookings(); loadUsers();
+                } else {
+                    showToast(data.message || 'Login failed', 'error');
+                }
+            } catch (err) { showToast('Login failed', 'error'); }
+        }
+
+        function adminLogout() { localStorage.removeItem('adminToken'); location.reload(); }
+
+        async function loadSpots() {
+            const token = localStorage.getItem('adminToken');
+            if (!token) return;
+            try {
+                const res = await fetch('http://localhost:5000/api/admin/spots', { headers: { 'Authorization': `Bearer ${token}` } });
+                const data = await res.json();
+                if (data.success) {
+                    document.getElementById('spotsList').innerHTML = data.spots.map(s => `
+                        <div class="spot-card">
+                            <h4>${escapeHtml(s.name)}</h4>
+                            <p>${escapeHtml(s.address)}</p>
+                            <p>₹${s.price_per_hour}/hr | ⭐${s.rating}</p>
+                            <p>🚗 ${s.available_spots}/${s.total_spots}</p>
+                            <div class="card-buttons">
+                                <button class="edit-btn" onclick='showEditModal(${JSON.stringify(s)})'>✏️ Edit</button>
+                                <button class="delete-btn" onclick="confirmDeleteSpot(${s.id})">🗑️ Delete</button>
+                            </div>
+                        </div>
+                    `).join('');
+                }
+            } catch (e) { console.log(e); }
+        }
+
+        function confirmDeleteSpot(id) {
+            showConfirmDialog('Are you sure you want to delete this parking spot? This action cannot be undone.', () => deleteSpot(id));
+        }
+
+        async function deleteSpot(id) {
+            const token = localStorage.getItem('adminToken');
+            try {
+                const res = await fetch(`http://localhost:5000/api/admin/spots/${id}`, {
+                    method: 'DELETE',
+                    headers: { 'Authorization': `Bearer ${token}` }
+                });
+                const data = await res.json();
+                if (data.success) {
+                    showToast('Spot deleted successfully!', 'success');
+                    await loadSpots();
+                } else {
+                    showToast(data.message || 'Delete failed', 'error');
+                }
+            } catch (error) {
+                showToast('Error deleting spot', 'error');
+            }
+        }
+
+        document.getElementById('addSpotForm')?.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const token = localStorage.getItem('adminToken');
+            const spot = {
+                name: document.getElementById('spotName').value,
+                address: document.getElementById('spotAddress').value,
+                city: document.getElementById('spotCity').value,
+                latitude: parseFloat(document.getElementById('spotLat').value),
+                longitude: parseFloat(document.getElementById('spotLng').value),
+                price_per_hour: parseInt(document.getElementById('spotPrice').value),
+                total_spots: parseInt(document.getElementById('spotTotal').value),
+                rating: parseFloat(document.getElementById('spotRating').value)
+            };
+
+            try {
+                const res = await fetch('http://localhost:5000/api/admin/spots', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
+                    body: JSON.stringify(spot)
+                });
+                const data = await res.json();
+                if (res.status === 201 || res.status === 200 || res.ok) {
+                    showToast('✅ Parking spot added successfully!', 'success');
+                    document.getElementById('addSpotForm').reset();
+                    document.getElementById('spotTotal').value = 50;
+                    document.getElementById('spotRating').value = 4.0;
+                    await loadSpots();
+                    showTab('spots');
+                } else {
+                    showToast(data.message || 'Failed to add spot', 'error');
+                }
+            } catch (error) {
+                console.error('Add spot error:', error);
+                // showToast('Error adding spot', 'error');
+            }
+        });
+
+        async function loadBookings() {
+            const token = localStorage.getItem('adminToken');
+            if (!token) return;
+            const res = await fetch('http://localhost:5000/api/admin/bookings', { headers: { 'Authorization': `Bearer ${token}` } });
+            const data = await res.json();
+            if (data.success) document.getElementById('bookingsList').innerHTML = data.bookings.map(b => `<tr><td>${escapeHtml(b.user_name)}</td><td>${escapeHtml(b.spot_name)}</td><td>${escapeHtml(b.vehicle_number)}</td><td>₹${b.total_amount}</td><td>${b.status}</td><td>${new Date(b.created_at).toLocaleDateString()}</td>`).join('');
+        }
+
+        async function loadUsers() {
+            const token = localStorage.getItem('adminToken');
+            if (!token) return;
+            const res = await fetch('http://localhost:5000/api/admin/users', { headers: { 'Authorization': `Bearer ${token}` } });
+            const data = await res.json();
+            if (data.success) document.getElementById('usersList').innerHTML = data.users.map(u => `<tr><td>${escapeHtml(u.name)}</td><td>${escapeHtml(u.email)}</td><td>${new Date(u.created_at).toLocaleDateString()}</td>`).join('');
+        }
+
+        function showTab(tab) {
+            document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+            document.getElementById(tab + 'Tab').classList.add('active');
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            if (tab === 'spots') loadSpots();
+            if (tab === 'bookings') loadBookings();
+            if (tab === 'users') loadUsers();
+        }
+
+        function escapeHtml(str) {
+            if (!str) return '';
+            return str.replace(/[&<>]/g, function (m) {
+                if (m === '&') return '&amp;';
+                if (m === '<') return '&lt;';
+                if (m === '>') return '&gt;';
+                return m;
+            });
+        }
+
+        if (localStorage.getItem('adminToken')) {
+            document.getElementById('loginSection').style.display = 'none';
+            document.getElementById('adminPanel').style.display = 'block';
+            loadSpots(); loadBookings(); loadUsers();
+        }
+    </script>
+</body>
+
+</html>

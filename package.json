@@ -1,0 +1,16 @@
+{
+  "name": "parking-finder",
+  "version": "1.0.0",
+  "description": "This is a web dev project with the topic Online Parking Space Finder with Booking System",
+  "license": "ISC",
+  "author": "Ashutosh Kumar",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "express": "^5.2.1",
+    "razorpay": "^2.9.6"
+  }
+}
