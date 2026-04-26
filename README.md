@@ -52,43 +52,44 @@
 
 ## 📁 Project Structure
 Parking Finder/
-├── backend/
+│
+├── backend/ # Backend Node.js server
 │ ├── config/
-│ │ └── db.js                                   # Database connection
+│ │ └── db.js # Database connection
 │ ├── controllers/
-│ │ ├── authController.js                       # Auth logic
-│ │ ├── bookingController.js                    # Booking logic
-│ │ └── parkingController.js                    # Parking spots logic
+│ │ ├── authController.js # Authentication logic
+│ │ ├── bookingController.js # Booking operations
+│ │ └── parkingController.js # Parking spots operations
 │ ├── middleware/
-│ │ └── auth.js                                 # JWT verification
+│ │ └── auth.js # JWT verification
 │ ├── routes/
-│ │ ├── auth.js                                 # Auth routes
-│ │ ├── booking.js                              # Booking routes
-│ │ ├── parking.js                              # Parking routes
-│ │ |-- admin.js                                # Admin routes
-| | |-- payment.js                              # Payment routes
-│ ├── .env                                      # Environment variables
-│ └── server.js                                 # Backend entry point
+│ │ ├── auth.js # Authentication routes
+│ │ ├── booking.js # Booking routes
+│ │ ├── parking.js # Parking routes
+│ │ ├── admin.js # Admin routes
+│ │ └── payment.js # Payment routes (Razorpay)
+│ ├── .env # Environment variables
+│ └── server.js # Backend entry point
 │
-├── public/
+├── public/ # Frontend files
 │ ├── css/
-│ │ ├── style.css                               # Landing page styles
-│ │ └── map.css                                 # Map page styles
+│ │ ├── style.css # Landing page styles
+│ │ └── map.css # Map page styles
 │ ├── js/
-│ │ ├── main.js                                 # Landing page logic
-│ │ ├── map.js                                  # Map page logic
+│ │ ├── main.js # Landing page logic
+│ │ ├── map.js # Map page logic
 │ │ └── modules/
-│ │ ├── auth.js                                 # Authentication module
-│ │ ├── search.js                               # Search module
-│ │ ├── navigation.js                           # Navigation module
-│ │ └── animations.js                           # Animation module
-│ ├── index.html                                # Landing page
-│ ├── map.html                                  # Map & booking page
-│ └── admin.html                                # Admin panel
+│ │ ├── auth.js # Authentication module
+│ │ ├── search.js # Search module
+│ │ ├── navigation.js # Navigation module
+│ │ └── animations.js # Animation module
+│ ├── index.html # Landing page
+│ ├── map.html # Map & booking page
+│ └── admin.html # Admin panel
 │
-├── server.js                                   # Frontend server
-├── package.json                                # Dependencies
-└── README.md                                   # Project documentation
+├── server.js # Frontend server
+├── package.json # Dependencies
+└── README.md # Project documentation
 
 ---
 
