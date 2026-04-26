@@ -53,43 +53,45 @@
 ## 📁 Project Structure
 Parking Finder/
 │
-├── backend/ # Backend Node.js server
-│ ├── config/
-│ │ └── db.js # Database connection
-│ ├── controllers/
-│ │ ├── authController.js # Authentication logic
-│ │ ├── bookingController.js # Booking operations
-│ │ └── parkingController.js # Parking spots operations
-│ ├── middleware/
-│ │ └── auth.js # JWT verification
-│ ├── routes/
-│ │ ├── auth.js # Authentication routes
-│ │ ├── booking.js # Booking routes
-│ │ ├── parking.js # Parking routes
-│ │ ├── admin.js # Admin routes
-│ │ └── payment.js # Payment routes (Razorpay)
-│ ├── .env # Environment variables
-│ └── server.js # Backend entry point
+├── backend/
+│   ├── config/
+│   │   └── db.js
+│   ├── controllers/
+│   │   ├── authController.js
+│   │   ├── bookingController.js
+│   │   └── parkingController.js
+│   ├── middleware/
+│   │   └── auth.js
+│   ├── routes/
+│   │   ├── auth.js
+│   │   ├── booking.js
+│   │   ├── parking.js
+│   │   ├── admin.js
+│   │   └── payment.js
+│   ├── .env
+│   └── server.js
 │
-├── public/ # Frontend files
-│ ├── css/
-│ │ ├── style.css # Landing page styles
-│ │ └── map.css # Map page styles
-│ ├── js/
-│ │ ├── main.js # Landing page logic
-│ │ ├── map.js # Map page logic
-│ │ └── modules/
-│ │ ├── auth.js # Authentication module
-│ │ ├── search.js # Search module
-│ │ ├── navigation.js # Navigation module
-│ │ └── animations.js # Animation module
-│ ├── index.html # Landing page
-│ ├── map.html # Map & booking page
-│ └── admin.html # Admin panel
+├── public/
+│   ├── css/
+│   │   ├── style.css
+│   │   └── map.css
+│   ├── js/
+│   │   ├── main.js
+│   │   ├── map.js
+|   |   |-- utils/
+|   |   |   |-- helpers.js
+│   │   └── modules/
+│   │       ├── auth.js
+│   │       ├── search.js
+│   │       ├── navigation.js
+│   │       └── animations.js
+│   ├── index.html
+│   ├── map.html
+│   └── admin.html
 │
-├── server.js # Frontend server
-├── package.json # Dependencies
-└── README.md # Project documentation
+├── server.js
+├── package.json
+└── README.md
 
 ---
 
