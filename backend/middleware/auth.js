@@ -3,7 +3,7 @@ import dotenv from "dotenv";
 
 dotenv.config();
 
-const JWT_SECRET = process.env.JWT_SECRET || "parkease_super_secret_key_2024";
+const JWT_SECRET = process.env.JWT_SECRET || "parkease_super_secret_key_2026";
 
 export const authenticateToken = (req, res, next) => {
   const authHeader = req.headers["authorization"];
